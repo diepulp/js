@@ -1,0 +1,20 @@
+li{
+    list-style: none;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+}
+button{
+    width: 200px;
+}
+
+input{
+    width: 200px;
+    margin-bottom: 20px;
+
+}
+.err{
+    color: red; 
+}
