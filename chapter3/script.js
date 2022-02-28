@@ -3,14 +3,11 @@
 //Date: 02/01/22
 
 window.onload = () => {
-
   let button = document.querySelector("button");
-  let inputField = document.querySelector("input");
-  let input = inputField.value;
   button.addEventListener(
     "click",
     () => {
-      printGibberish(input);
+      printGibberish();
     },
     false
   );
@@ -19,18 +16,21 @@ window.onload = () => {
   
 };
 
-function printGibberish(num) {
-  if (num < 0){
+function printGibberish() {
+  let inputField = document.getElementById("numInput");
+  let input = inputField.value;
+  if (input < 0){
     let error = document.createElement('li');
     let errorMessage = document.createTextNode("The number cannot be negative");
     let position = document.querySelectorAll("ul")[0];
+    
 
     position.className = "err";
     error.appendChild(errorMessage);
     position.appendChild(error);
   } 
 else {
-  for (let i = 0; i <= num; ++i) {
+  for (let i = 0; i <= input; ++i) {
     let textReturned = heeHaw(i);
     let position = document.querySelector("ul");
     let newText = document.createTextNode(textReturned);
