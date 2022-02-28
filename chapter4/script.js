@@ -1,49 +1,54 @@
-    window.onload = () => {
-        let btn = document.querySelector("button");
-        btn.addEventListener('click', () => {
-            printJson() }, false);
+window.onload = () => {
+    let btn = document.querySelector("button");
+    let input = document.querySelector('input').value.toLowerCase();
+    const output = document.getElementById('output')
+    const data = [
+        '{"Name": "Jane Doe", "Sex": "f", "Born": "1876", "Died": "1956", "Father": "Petreus de Milliano", "Mother": "Sophia van Damme"}',
+        '{"Name": "Jane Ramirez", "Sex": "f", "Born": "1102", "Died": "--", "Father": "Themistocles Merovech", "Mother": "Amara Flores"}',
+        '{"Name": "Aldous Huxley", "Sex": "m", "Born": "1984", "Died": "1963", "Father": "Leonard Huxley", "Mother": "Julia Arnold"}',
+        '{"Name": "Charles Bukowsky", "Sex": "m", "Born": "1984", "Died": "1963", "Father": "Leonard Bukowsky", "Mother": "Emilie Krauze"}',
+        '{"Name": "Carl Gustav Jung", "Sex": "m", "Born": "1984", "Died": "1963", "Father": "Sigmund Freud", "Mother": "Emilie Preiswerk"}'
+    ];
 
-        let jSon = '{"name": "Jane Doe","Sex": "f", "Born": "1876", ' +
-            '"Died": "1956", "Father": "Petreus De Milano","Mother":"Sophia Van Damme"}';
-        let woman = JSON.parse(jSon);
-        let array = [];
-        array.push(woman);
-        console.log(array);
-        console.log(array[0].Sex);
-        console.log(array[0].Born);
-        console.log(array[0].Father);
-        let output = document.querySelector('p');
-        let name = array["Sex"];
-        output.innerHTML = name;
-        const data = [
-            '{"Name": "Jane Doe", "Sex": "f", "Born": "1876", "Died": "1956", "Father": "Petreus de Milliano", "Mother": "Sophia van Damme"}',
-            '{"Name": "Jane Ramirez", "Sex": "f", "Born": "1102", "Died": "--", "Father": "Themistocles Merovech", "Mother": "Amara Flores"}'
-        ];
 
-        for (let name of data){
-            name = JSON.parse(name);
+    const array = [];
 
-            for (let key in name){
-                output.innerText ="<pre>" +  key + ":" + name.key + "</pre>";
-            }
-            output.innerHTML = JSON.stringify(name);
+    //parse the JSON data and add it to array
+    for (let obj of data){
+        obj = JSON.parse(obj)
+        array.push(obj)
+    }
+    console.log(array)
+
+   //wait for input
+    btn.addEventListener('click', () => {
+        printJson(array)
+    }, false);
+
+
+}
+
+function printJson(array) {
+    let output = document.getElementById('output');
+    let input = document.querySelector('input').value.toLowerCase()
+    output.innerHTML = ""
+    for (let field of array){
+        if (field["Name"].toLowerCase().startsWith(input)){
+            output.textContent += generateOutput(field)
         }
-
-
+        else{
+            output += " Not found"
+        }
     }
+}
 
-    function printJson() {
-            let jSon = '{"name": "Jane Doe",' +
-                '"Sex": "f", ' +
-                '"Born": "1876", ' +
-                '"Died": "1956", ' +
-                '"Father": "Petreus De Milano",' +
-                '"Mother":"Sophia Van Damme"}, {"name": Vladimir, "father": eugene}';
-        let woman = JSON.parse(jSon);
-        console.log(woman);
-
-        let output = document.querySelector('p');
-         output.textContent = jSon;
-
+function generateOutput(field){
+    let string = "<p>"
+    for (let key in field){
+        string += key + ": " + field[key] + '<br>';
     }
+    string += "</p>"
+    return string;
+}
+
 
