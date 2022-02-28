@@ -1,3 +1,6 @@
+//Assignment: Chapter 4 Practice
+//Author: Vladimir Ivanov
+//Date: 02/01/26
 window.onload = () => {
     let btn = document.querySelector("button");
     let input = document.querySelector('input').value.toLowerCase();
@@ -32,13 +35,13 @@ function printJson(array) {
     let output = document.getElementById('output');
     let input = document.querySelector('input').value.toLowerCase()
     output.innerHTML = ""
-    for (let field of array){
+    for (const field of array){
         if (field["Name"].toLowerCase().startsWith(input)){
-            output.textContent += generateOutput(field)
+            output.innerHTML += generateOutput(field)
         }
-        else{
-            output += " Not found"
-        }
+    }
+    if (output.innerHTML === ""){
+        output.innerHTML += " Not found"
     }
 }
 
